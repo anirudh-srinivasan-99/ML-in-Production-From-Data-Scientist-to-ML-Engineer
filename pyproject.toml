@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "ipl score prediction"
+version = "0.1.0"
+description = "This is a project  to demonstrate the practical concepts learnt in udemy course"
+authors = ["Anirudh Srinivasan"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.10.10"
+pandas = "^2.2.2"
+openpyxl = "^3.1.5"
+scikit-learn = "^1.5.1"
+xgboost = "^2.1.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
