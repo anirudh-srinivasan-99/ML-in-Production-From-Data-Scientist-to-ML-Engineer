@@ -1,4 +1,7 @@
 import pandas as pd
 
-def get_data_from_excel(path: str = "Data.xlsx") -> pd.DataFrame:
+from config import settings
+
+
+def get_data_from_excel(path: str = settings.data_path) -> pd.DataFrame:
     return pd.read_excel(path)

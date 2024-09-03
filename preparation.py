@@ -2,9 +2,9 @@ import pandas as pd
 from typing import List
 
 from collection import get_data_from_excel
+from config import settings
 
-
-def prepare_data(path: str = "Data.xlsx") -> pd.DataFrame:
+def prepare_data(path: str = settings.data_path) -> pd.DataFrame:
     df = get_data_from_excel(path)
 
     df['HS'] = df['HS'].map(get_clean_high_score)

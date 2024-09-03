@@ -1,11 +1,13 @@
-import pandas as pd
+from os.path import join
 from typing import Tuple
+import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
 import xgboost
 import pickle as pk
 
 from preparation import prepare_data
+from config import settings
 
 def build_model():
     df = prepare_data()
@@ -45,8 +47,6 @@ def train_model(
         'base_score': [0.25,0.5,0.75,1]
     }
 
-    regressor=xgboost.XGBRegressor()
-
     grid = GridSearchCV(
         xgboost.XGBRegressor(), 
         param_grid=grid_space, n_jobs=5,
@@ -66,4 +66,6 @@ def evaluate_model(
 def save_model(
     regressor: xgboost.XGBRegressor
 ):
-    pk.dump(regressor, open('models/xgr_v1', 'wb'))
+    save_path = join(settings.model_dir, settings.model_name)
+    with open(save_path, 'wb') as f:
+        pk.dump(regressor, f)
