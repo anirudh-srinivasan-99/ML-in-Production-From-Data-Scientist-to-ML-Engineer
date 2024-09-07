@@ -1,15 +1,13 @@
 import pandas as pd
 from typing import List
 
-from collection import get_data_from_excel
-from config import settings
+from collection import get_data_from_db
 from loguru import logger
 
 
-def prepare_data(path: str = settings.data_path) -> pd.DataFrame:
+def prepare_data() -> pd.DataFrame:
     logger.info("Starting prepare_data() function !!")
-    logger.debug(f"Input path: {path}")
-    df = get_data_from_excel(path)
+    df = get_data_from_db()
     logger.info("Cleaned HS and Avg columns !!")
     df['HS'] = df['HS'].map(get_clean_high_score)
     df['Avg'] = df['Avg'].map(get_clean_average) 
