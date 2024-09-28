@@ -1,8 +1,8 @@
 from os.path import join, exists
 import pickle as pk
 
-from model import build_model
-from config import settings
+from app.model.pipeline.model import build_model
+from app.config.config import settings
 from loguru import logger
 
 

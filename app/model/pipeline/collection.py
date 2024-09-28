@@ -1,8 +1,8 @@
 import pandas as pd
 
-from config import settings, engine
+from app.config.config import settings, engine
 from loguru import logger
-from db_model import IPLData
+from app.database.db_model import IPLData
 from sqlalchemy import select
 
 def get_data_from_excel(path: str = settings.data_path) -> pd.DataFrame:

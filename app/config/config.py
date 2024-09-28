@@ -4,8 +4,7 @@ from loguru import logger
 from sqlalchemy import create_engine
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file = '.env', env_file_encoding='utf-8')
-    
+    model_config = SettingsConfigDict(env_file = 'app/config/.env', env_file_encoding='utf-8', extra='ignore')
     data_path: FilePath
     model_dir: DirectoryPath
     model_name: str
@@ -15,8 +14,8 @@ class Settings(BaseSettings):
 settings = Settings()
 
 logger.add(
-    "app.log", retention='1 week', rotation = '1 day',
+    "app/log/app.log", retention='1 week', rotation = '1 day',
     level = 'INFO'
 )
 
-engine = create_engine(settings.db_conn_str) 
+engine = create_engine(settings.db_conn_str)

@@ -1,5 +1,5 @@
-from model_service import ModelService
-from config import settings
+from app.model.model_service import ModelService
+from app.config.config import settings
 from loguru import logger
 
 

@@ -6,8 +6,8 @@ from sklearn.model_selection import GridSearchCV
 import xgboost
 import pickle as pk
 
-from preparation import prepare_data
-from config import settings
+from app.model.pipeline.preparation import prepare_data
+from app.config.config import settings
 from loguru import logger
 
 def build_model():

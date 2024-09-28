@@ -1,8 +1,8 @@
-import pandas as pd
 from typing import List
-
-from collection import get_data_from_db
+import pandas as pd
 from loguru import logger
+
+from app.model.pipeline.collection import get_data_from_db
 
 
 def prepare_data() -> pd.DataFrame:

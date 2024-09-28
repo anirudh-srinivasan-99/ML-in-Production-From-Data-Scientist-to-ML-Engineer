@@ -1,6 +1,6 @@
 from sqlalchemy import REAL, INTEGER, VARCHAR
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from config import settings
+from app.config.config import settings
 
 
 class Base(DeclarativeBase):
@@ -24,4 +24,3 @@ class IPLData(Base):
     fours_scored: Mapped[int] = mapped_column(INTEGER())
     sixes_scored: Mapped[int] = mapped_column(INTEGER())
     runs_in_2019: Mapped[int] = mapped_column(INTEGER())
-
