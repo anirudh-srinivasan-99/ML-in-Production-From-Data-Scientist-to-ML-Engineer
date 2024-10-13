@@ -1,0 +1,43 @@
+name: Build the Application
+
+runs:
+  using: composite
+
+  steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v4
+    
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10.11'
+    
+    - name: Install poetry
+      uses: snok/install-poetry@v1
+    
+    - name: Load cached venv
+      uses: actions/cache@v4
+      # Name of the cache file, would be critical in referring to this
+      # file in subsequent steps.
+      # If the virtual env exists, it directly loads it into this path provided.
+      # If not, it caches the folder and creates a new key.
+      id: cached-poetry-dependencies
+      with:
+        path: .venv
+        # We are creating the key in a combination of OS and the poetry.lock file.
+        # Thus any change to the poetry.lock file would result in a new key, not
+        # matching with the previous one, and hence it would not retrieve outdated
+        # venv. 
+        key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+    
+    - name: Install dependencies using poetry
+      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      run: poetry run make install
+      shell: bash
+      # Since action file does not have any OS defined, we need to 
+      # mention using which medium this command would be executed.
+      
+      # Note that, in the other steps we are using pre-existing action
+      # from github marketplace where they would have accounted for this
+      # and configured their .yml file. We can validate this by looking
+      # into the .yml file of the actions we use.
