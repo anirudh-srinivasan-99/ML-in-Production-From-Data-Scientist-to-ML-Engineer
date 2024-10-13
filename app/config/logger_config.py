@@ -24,7 +24,7 @@ def configure_logging(log_level: str) -> None:
     """
     logger.remove()
     logger.add(
-        'app/log/app.log',
+        r'app/log/app.log',
         retention='1 week',
         rotation='1 day',
         level=log_level,
