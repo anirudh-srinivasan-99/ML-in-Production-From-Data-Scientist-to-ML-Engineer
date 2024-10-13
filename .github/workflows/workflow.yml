@@ -23,8 +23,24 @@ jobs:
       - name: Install poetry
         uses: snok/install-poetry@v1
       
+      - name: Load cached venv
+        uses: actions/cache@v4
+        # Name of the cache file, would be critical in referring to this
+        # file in subsequent steps.
+        # If the virtual env exists, it directly loads it into this path provided.
+        # If not, it caches the folder and creates a new key.
+        id: cached-poetry-dependencies
+        with:
+          path: .venv
+          # We are creating the key in a combination of OS and the poetry.lock file.
+          # Thus any change to the poetry.lock file would result in a new key, not
+          # matching with the previous one, and hence it would not retrieve outdated
+          # venv. 
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+      
       - name: Install dependencies using poetry
-        run: poetry run make install 
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry run make intall
       
       - name: Lint with flake8
         run: poetry run make check
