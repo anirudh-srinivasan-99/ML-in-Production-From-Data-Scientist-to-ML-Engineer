@@ -40,7 +40,7 @@ jobs:
       
       - name: Install dependencies using poetry
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry run make intall
+        run: poetry run make install
       
       - name: Lint with flake8
         run: poetry run make check
